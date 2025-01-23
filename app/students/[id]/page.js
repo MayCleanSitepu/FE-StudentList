@@ -65,6 +65,11 @@ export default function StudentDetail({ params }) {
     }
   };
 
+  const handleDelete = async () => {
+    await axios.delete(`https://localhost:7191/api/Students/${studentId}`);
+    router.push("/");
+  }
+
   return (
     <div className="py-20 flex justify-center">
       <div className="w-full max-w-md my-10">
@@ -128,7 +133,9 @@ export default function StudentDetail({ params }) {
           >
             Edit
           </button>
-          <button className="w-full bg-red-400 px-3 py-1.5">Delete</button>
+          <button 
+          onClick={handleDelete}
+          className="w-full bg-red-400 px-3 py-1.5">Delete</button>
         </div>
       </div>
     </div>
