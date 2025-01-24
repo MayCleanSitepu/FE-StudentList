@@ -61,8 +61,7 @@ const Students = () => {
               <thead className="bg-gray-100 border-b-2 border-gray-200">
                 <tr>
                   <th className="px-2 md:px-6 py-4 text-left text-xs md:text-sm font-semibold text-gray-700">NIM</th>
-                  <th className="px-2 md:px-6 py-4 text-left text-xs md:text-sm font-semibold text-gray-700">First Name</th>
-                  <th className="px-2 md:px-6 py-4 text-left text-xs md:text-sm font-semibold text-gray-700">Last Name</th>
+                  <th className="px-2 md:px-6 py-4 text-left text-xs md:text-sm font-semibold text-gray-700">Name</th>
                   <th className="px-2 md:px-6 py-4 text-left text-xs md:text-sm font-semibold text-gray-700">Age</th>
                   <th className="px-2 md:px-6 py-4 text-left text-xs md:text-sm font-semibold text-gray-700">Actions</th>
                 </tr>
@@ -72,8 +71,7 @@ const Students = () => {
                   students.map((student) => (
                     <tr key={student.studentId} className="hover:bg-gray-50">
                       <td className="px-2 md:px-6 py-4 text-xs md:text-sm text-gray-800">{student.studentId}</td>
-                      <td className="px-2 md:px-6 py-4 text-xs md:text-sm text-gray-800">{student.name}</td>
-                      <td className="px-2 md:px-6 py-4 text-xs md:text-sm text-gray-800">{student.lastName}</td>
+                      <td className="px-2 md:px-6 py-4 text-xs md:text-sm text-gray-800">{student.name} {student.lastName}</td>
                       <td className="px-2 md:px-6 py-4 text-xs md:text-sm text-gray-800">{student.age} years</td>
                       <td className="px-2 md:px-6 py-4 space-x-1 md:space-x-3">
                         <Link href={`/students/${student.studentId}?mode=read`}>
