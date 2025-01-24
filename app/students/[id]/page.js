@@ -73,9 +73,9 @@ export default function StudentDetail({ params }) {
   return (
     <div className="py-20 flex justify-center">
       <div className="w-full max-w-md my-10">
-        <h1 className="text-3xl text-center my-5">
-          {edit ? "Edit Student" : "Data Student"}
-        </h1>
+        <h3 className="text-2xl md:text-3xl font-bold text-gray-800">
+          {edit ? "Edit Student" : "Student"}
+        </h3>
         {student ? (
           <div className="flex flex-col items-center">
             {edit ? (
@@ -98,44 +98,48 @@ export default function StudentDetail({ params }) {
                 />
                 <input
                   className="p-2 border border-slate-500"
-                  type="datetime-local" // Ganti jadi datetime-local
-                  value={bithday.split(".")[0]} // Agar kompatibel dengan input datetime-local
+                  type="datetime-local"
+                  value={bithday.split(".")[0]}
                   onChange={(e) => setBithday(e.target.value)}
                 />
                 <button className="w-full bg-green-300">Save</button>
               </form>
             ) : (
-              // Tampilkan data student jika tidak dalam mode edit
-              <div>
-                <h3 className="text-lg font-semibold">
-                  ID/NIM: {student.studentId}
-                </h3>
-                <h3 className="text-lg font-semibold">
-                  Name: {student.name}
-                </h3>
-                <h3 className="text-lg font-semibold">
-                  Last Name: {student.lastName}
-                </h3>
-              </div>
+              <table className="shadow-lg  min-w-full table-auto border-collapse my-10">
+                <thead className="bg-gray-100 border-b-2 border-gray-200">
+                  <tr>
+                    <th className="px-2 md:px-6 py-4 text-left text-xs md:text-sm font-semibold text-gray-700">NIM</th>
+                    <th className="px-2 md:px-6 py-4 text-left text-xs md:text-sm font-semibold text-gray-700">First Name</th>
+                    <th className="px-2 md:px-6 py-4 text-left text-xs md:text-sm font-semibold text-gray-700">Last Name</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-2 md:px-6 py-4 text-xs md:text-sm text-gray-800">{student.studentId}</td>
+                    <td className="px-2 md:px-6 py-4 text-xs md:text-sm text-gray-800">{student.name}</td>
+                    <td className="px-2 md:px-6 py-4 text-xs md:text-sm text-gray-800">{student.lastName}</td>
+                  </tr>
+                </tbody>
+              </table>
             )}
           </div>
         ) : (
           <p>Loading student details...</p>
         )}
 
-        <div className="flex space-x-16 mt-5">
+        <div className="flex justify-center space-x-16 mt-5">
           <button 
           onClick={()=> router.push('/')}
-          className="w-full bg-blue-400 px-3 py-1.5">Home</button>
+          className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded text-white font-medium">Home</button>
           <button
-            className="w-full bg-green-400 px-3 py-1.5"
+            className="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 rounded text-white font-medium"
             onClick={() => setEdit(!edit)}
           >
             Edit
           </button>
           <button 
           onClick={handleDelete}
-          className="w-full bg-red-400 px-3 py-1.5">Delete</button>
+          className="px-4 py-2 bg-red-500 hover:bg-red-600 rounded text-white font-medium">Delete</button>
         </div>
       </div>
     </div>

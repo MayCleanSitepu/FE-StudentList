@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
@@ -7,12 +7,18 @@ const Create = () => {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [bithday, setBirthday] = useState("");
+  const [isFormValid, setIsFormValid] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    // Check form input
+    setIsFormValid(name !== "" && lastName !== "" && bithday !== "");
+  }, [name, lastName, bithday]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Convert `bithday` to ISO format
+    // Convert ISO format
     const formattedBirthday = new Date(bithday).toISOString();
 
     try {
@@ -31,29 +37,35 @@ const Create = () => {
   return (
     <>
       <div className="flex flex-col items-center py-20">
-        <h1 className="text-3xl"> Create New Student</h1>
-        <form onSubmit={handleSubmit} className="flex flex-col space-y-4 mt-6 border p-6">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-800"> Create New Student</h1>
+        <form onSubmit={handleSubmit} className="flex flex-col space-y-4 mt-6 border rounded-md p-6">
           <input
             type="text"
             value={name}
             placeholder="First Name"
-            className="p-2 border border-slate-500"
+            className="p-2 border rounded-md border-slate-200"
             onChange={(e) => setName(e.target.value)}
           />
           <input
             type="text"
             value={lastName}
             placeholder="Last Name"
-            className="p-2 border border-slate-500"
+            className="p-2 border rounded-md border-slate-200"
             onChange={(e) => setLastName(e.target.value)}
           />
           <input
             type="date"
             value={bithday}
-            className="p-2 border border-slate-500"
+            className="p-2 border rounded-md border-slate-200"
             onChange={(e) => setBirthday(e.target.value)}
           />
-          <button className="w-full bg-green-300 py-1.5">Submit</button>
+          <button
+            type="submit"
+            className={`px-4 py-2 rounded text-white font-medium ${isFormValid ? "bg-green-500 hover:bg-green-600" : "bg-gray-400 cursor-not-allowed"}`}
+            disabled={!isFormValid}
+          >
+            Submit
+          </button>
         </form>
       </div>
     </>
